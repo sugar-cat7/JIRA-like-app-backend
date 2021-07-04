@@ -1,4 +1,4 @@
-JIRA とれーす
+JIRA like app backend
 
 ## What’s this project?
 
