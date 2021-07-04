@@ -1,4 +1,4 @@
-JIRA とれーす
+JIRA like app backend
 
 ## What’s this project?
 
@@ -49,10 +49,10 @@ djoser==2.0.3 -> 認証関係のサードパーティ
 └── wsgi.py
 ```
 
-    - 最初にインストールした諸々を設定する
-        - INSTALLED_APPに追記 →Djangoインスタンスの中で有効化されているすべてのDjangoアプリケーションの名前を保持するリストの環境変数→つまりそのままアプリの構成になる
-        - いつ追記する？
-            - django-admin startapp でローカルアプリケーションを追加した場合, サードパーティのライブラリをインストールした場合→追記順に関してはバラバラ？らしい
+- 最初にインストールした諸々を設定する
+- INSTALLED_APPに追記 →Djangoインスタンスの中で有効化されているすべてのDjangoアプリケーションの名前を保持するリストの環境変数→つまりそのままアプリの構成になる
+- いつ追記する？
+    - django-admin startapp でローカルアプリケーションを追加した場合, サードパーティのライブラリをインストールした場合→追記順に関してはバラバラ？らしい
 
 ```
 'corsheaders',→ サードパティ
@@ -79,14 +79,15 @@ djoser==2.0.3 -> 認証関係のサードパーティ
 
 White list に追加
 
-```CORS_ORIGIN_WIHITELIST = [
+```python
+CORS_ORIGIN_WIHITELIST = [
     "http://localhost:3000" -> reactの場合
 ]
 ```
 
 - Permission 諸々の設定(JWT(JSON Web Token)活用 -> 署名、暗号化、URL-safe)
 
-```
+```python
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated', -> プロジェクトの全体に新章地味のユーザーのみアクセスできるようにしている
@@ -108,14 +109,14 @@ SIMPLE_JWT = {
     - UTC -> Asia／Tokyo
   - 画像データ等の格納場所の指定
 
-```
+```python
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') -> BASE_DIRは大元のPATH(今回はjira_api)
 MEDIA_URL = '/media/'
 ```
 
 ### {project}/urls に api や jwt の path をかく
 
-```
+```python
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -131,7 +132,7 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)　-
 
 - api/urls の中身
 
-```
+```python
 from django.urls import path, include
 from rest_framework import routers
 router = routers.DefaultRouter() -> routerを登録
