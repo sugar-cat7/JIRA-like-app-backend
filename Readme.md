@@ -392,3 +392,49 @@ urlpatterns = [
 - Postman 使えば楽
 - Access トークンの取得の際は`/authen/jwt/create/`を叩く
   - Chrome の拡張機能の modheader に accesstoken 持たせると認証突破できる
+
+
+### AWSへのデプロイ
+- AWS上で扱う際に便利なパッケージ 
+  - 環境変数,DBを簡単に扱えるようにする
+```bash
+$ pip install django-environ 
+$ pip install dj-database-url
+```
+- setting.pyの設定
+
+adminの画面とかもともとデフォルトであったものをstaticにまとめるためにRootを設定
+```python
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+```
+ベタ書きだった部分をenvファイルから読み込む
+```python
+import environ
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR,'.env'))
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
+DATABASES = {
+    'default': env.db(),
+}
+```
+
+- .env
+↓よしなに
+```
+SECRET_KEY=-----
+DEBUG=False
+DATABASE_URL=sqlite://db.splite3
+```
+- 仮想環境に入れてた依存関係等々を掃き出しとく
+` pip freeze > requirements-dev.txt`
+  
+- requiements.txtを作って依存関係のやつとその他prod環境で使いたいものを入れる
+```
+-r requirements-dev.txt
+gunicorn
+psycopg2
+```
+
+
+
