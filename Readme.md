@@ -3,7 +3,6 @@ JIRA like app backend
 ## What’s this project?
 
 - Project to develop a technical understanding of the front and server-side sequence of processes using Django framework and React .
-- Reference [Udemy-React Hooks/TypeScript + Django REST API で作るオリジナル JIRA](https://www.udemy.com/course/jirareact-hookstypescript-django-rest-apijira/)
 
 ### 環境づくり
 
