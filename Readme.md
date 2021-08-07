@@ -13,8 +13,8 @@ JIRA like app backend
 ```
 pip install Django==3.1
 djangorestframework==3.11.1 -> RESTframework
-django-cors-headers==3.4.0 -> ?
-djangorestframework-simplejwt==4.6.0 -> json web token扱うよう
+django-cors-headers==3.4.0 -> レスポンスに Cross-Origin Resource Sharing (CORS) ヘッダを追加
+djangorestframework-simplejwt==4.6.0 -> json web token扱う
 djoser==2.0.3 -> 認証関係のサードパーティ
  Pillow   -> アバター関係
 ```
